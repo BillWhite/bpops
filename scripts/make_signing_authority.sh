@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 ECHO=
 # options may be followed by one colon to indicate they have a required argument
 if ! options=$(getopt -u -o uhdeD:t:f: -l user,host,debug,echo,domain-list:,cipher:,outfile: -- "$@")
@@ -17,9 +17,9 @@ while [ $# -gt 0 ]
 do
   case $1 in
     -u|--user)           KEY_KIND=; OUTFILE=user_ca_key; KIND_NAME="User";;
-    -h|--host-key)       KEY_KIND=-h; OUTFILE=host_ca_key; KIND_NAME="Host" ;;
+    -h|--host)           KEY_KIND=-h; OUTFILE=host_ca_key; KIND_NAME="Host" ;;
     -d|--debug)          set -v;;
-    -e|--echo)           ECHO=echo;;
+    -e|--echo)           ECHO="echo :---: ";;
     # for options with required arguments, an additional shift is required
     -D|--domain-list)    DOMAINS="$2" ; shift;;
     -t|--cipher)         CIPHER="$2"; shift;;
